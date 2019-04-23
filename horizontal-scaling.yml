@@ -1,0 +1,29 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  annotations:
+    autoscaling.alpha.kubernetes.io/conditions: '[{"type":"AbleToScale","status":"True","lastTransitionTime":"2019-04-18T07:44:41Z","reason":"ReadyForNewScale","message":"the
+      last scale time was sufficiently old as to warrant a new scale"},{"type":"ScalingActive","status":"True","lastTransitionTime":"2019-04-18T07:40:11Z","reason":"ValidMetricFound","message":"the
+      HPA was able to successfully calculate a replica count from cpu resource utilization
+      (percentage of request)"},{"type":"ScalingLimited","status":"True","lastTransitionTime":"2019-04-18T08:46:26Z","reason":"TooFewReplicas","message":"the
+      desired replica count is increasing faster than the maximum scale rate"}]'
+    autoscaling.alpha.kubernetes.io/current-metrics: '[{"type":"Resource","resource":{"name":"cpu","currentAverageUtilization":0,"currentAverageValue":"0"}}]'
+  creationTimestamp: 2019-04-18T07:39:11Z
+  name: webapp
+  namespace: default
+  resourceVersion: "293604"
+  selfLink: /apis/autoscaling/v1/namespaces/default/horizontalpodautoscalers/webapp
+  uid: 0e7b2709-61ad-11e9-9982-42010a8001c7
+spec:
+  maxReplicas: 6
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: webapp
+  targetCPUUtilizationPercentage: 50
+status:
+  currentCPUUtilizationPercentage: 0
+  currentReplicas: 2
+  desiredReplicas: 2
+  lastScaleTime: 2019-04-18T07:39:41Z

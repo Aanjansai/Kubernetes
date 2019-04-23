@@ -1,0 +1,29 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - image: gcr.io/web-application-231505/new-chat:latest
+        imagePullPolicy: "Always"
+        name: webapp
+        env:
+        - name: POSTGRES_HOST
+          value: postgres
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DATABASE
+          value: chatapplication
+        - name: POSTGRES_USER
+          value: postgresql
+        - name: POSTGRES_PASSWORD
+          value: postgresql1112
+        - name: GET_HOST_FROM
+          value: env
+        ports:
+        - containerPort: 8000

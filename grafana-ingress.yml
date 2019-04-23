@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "webapplication-lb-static-ip"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: grafana.webapps.saiapplications.online
+    http:
+      paths:
+      - backend:
+          serviceName: prom-grafana
+          servicePort: 80
